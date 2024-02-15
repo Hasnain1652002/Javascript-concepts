@@ -1,0 +1,29 @@
+#box {
+    color: blanchedalmond;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(0, 0, 0);
+    margin: 5px;
+    text-align: center;
+    background-color: rgb(132, 42, 133);
+}
+ 
+p{
+    color: rgb(33, 33, 169);
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+
+body{
+    background-color: beige;
+}
+
+/* div{
+    height: 50px;
+    width: 50px ;
+    background-origin: padding-box;
+    background-color: black;
+    text-align: center;
+    color: blanchedalmond;
+} */

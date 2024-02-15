@@ -1,0 +1,23 @@
+#box {
+    color: rgb(10, 61, 156); /* Changed color to cornflowerblue */
+    width: 120px; /* Increased width for better alignment */
+    height: 120px; /* Increased height for better alignment */
+    border: 2px solid rgb(0, 0, 0); /* Increased border width */
+    margin: 10px; /* Increased margin for better spacing */
+    text-align: center;
+    background-color: lightcoral; /* Changed background color to lightcoral */
+}
+
+.para {
+    color: rgb(30, 83, 83); /* Changed color to darkslategray */
+    font-size: 16px; 
+    font-weight: bold;
+}
+
+.content{
+    background-color: burlywood;
+    text-decoration: underline;
+}
+body {
+    background-color: lightgray; /* Changed background color to lightgray */
+}
