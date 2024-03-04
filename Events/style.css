@@ -1,0 +1,20 @@
+div{
+    height: 100px;
+    width: 100px;
+    border: 2px solid rgb(92, 35, 146);
+    columns: black;
+    background-color: cyan;
+    text-align: center;
+    text-decoration: dashed;
+    font-size: medium;
+}
+
+.dark{
+    background-color: antiquewhite;
+    color: black;
+}
+
+.light{
+    background-color: black;
+    color: bisque;
+}
