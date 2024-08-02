@@ -1,79 +1,49 @@
-let boxes = document.querySelectorAll(".box");
-let reset = document.querySelector("#reset");
-let newgame = document.querySelector(".newgame");
-let msg = document.querySelector(".msg");
-let msg_container = document.querySelector(".msg_container")
+const apikey = "33d4f93679f9fc5b45c5ff2794884c79";
+const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
-let turnO = true;
+const searcBbox = document.querySelector(".search input");
+const searcBtn = document.querySelector(".search button");
+const weatherIcon = document.querySelector(".weather-icon");
 
-let winpattern = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-];
+async function checkweather(city){
+	const response =await fetch(apiurl + city + `&appid=${apikey}`);
+	
+	if (response.status == 404){
+		document.querySelector(".error").style.display = "block";
+		document.querySelector(".weather").style.display = "none";
+	}else{
+		var data = await response.json();
 
-const resetgame = () => {
-    turnO = true;
-    enableboxes();
-    msg_container.classList.add("hide");
+		document.querySelector(".city").innerHTML = data.name;
+		document.querySelector(".temp").innerHTML = Math.round(data.main.temp) +"°C";
+		document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+		document.querySelector(".wind").innerHTML = data.wind.speed + " Km/h";
 
+		if (data.weather[0].main == "Clouds"){
+			weatherIcon.src = "images/clouds.png";
+		}
+		else if (data.weather[0].main == "Clear"){
+			weatherIcon.src = "images/clear.png";
+		}
+		else if (data.weather[0].main == "Rain"){
+			weatherIcon.src = "images/rain.png";
+		}
+		else if (data.weather[0].main == "Drizzle"){
+			weatherIcon.src = "images/drizzle.png";
+		}
+		else if (data.weather[0].main == "Mist"){
+			weatherIcon.src = "images/mist.png";
+		}
+		else if (data.weather[0].main == "Snow"){
+			weatherIcon.src = "images/snow.png";
+		}
+
+		document.querySelector(".weather").style.display = "block";
+		document.querySelector(".error").style.display = "none";
+
+	}
 }
 
-const enableboxes = () => {
-    for (box of boxes){
-        box.disabled = false;
-        box.innerText = "";
-    }
-}
-
-const disableboxes = () => {
-    for (box of boxes){
-        box.disabled = true;
-    }
-}
-
-const showwinner = (winner) => {
-    msg.innerText = `Winner is ${winner}`;
-    msg_container.classList.remove("hide");
-    disableboxes();
-};
-
-const checkwinner = () => {
-    for (let pattern of winpattern){
-        let pos1 = boxes[pattern[0]].innerText;
-        let pos2 = boxes[pattern[1]].innerText;
-        let pos3 = boxes[pattern[2]].innerText;
-
-        if (pos1 != "" && pos2 != "" && pos3 != ""){
-            if (pos1===pos2 && pos2===pos3){
-                console.log("winner" ,pos1)
-                showwinner(pos1);
-            }
-        }
-    }
-};
-
-boxes.forEach(box => {
-    box.addEventListener("click",() => {
-        console.log("box was clicked")
-        if (turnO){
-            box.innerText = "O";
-            turnO = false;
-        }else{
-            box.innerText = "X";
-            turnO = true;
-        }
-        box.disabled = true;
-
-        checkwinner();
-    });
+searcBtn.addEventListener("click",()=>{
+	checkweather(searcBbox.value);
 });
-
-newgame.addEventListener("click",resetgame);
-
-reset.addEventListener("click",resetgame);
